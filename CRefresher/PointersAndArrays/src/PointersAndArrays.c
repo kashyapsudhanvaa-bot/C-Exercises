@@ -12,7 +12,7 @@ int main(void) {
 
 }
 */
-/*//Function for swapping
+//Function for swapping
 #include<stdio.h>
 void swap(int *a,int *b){
 int temp=*a;
@@ -25,7 +25,7 @@ swap(&a,&b);
 printf("a is %d and b is %d",a,b);
 return 0;
 }
-*/
+
 
 /* // Traversing an array and finding max value
 #include<stdio.h>
