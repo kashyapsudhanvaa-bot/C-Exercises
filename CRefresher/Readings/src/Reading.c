@@ -13,5 +13,6 @@ int main() {
     }
     printf("Average is: %.1f\n",sum/5.0);
     printf("Max is %d\n",max);
+    printf("Range Check Completed.\n");
     return 0;
 }
