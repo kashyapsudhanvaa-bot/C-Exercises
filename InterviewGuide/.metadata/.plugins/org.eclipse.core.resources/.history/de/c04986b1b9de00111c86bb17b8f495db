@@ -1,0 +1,175 @@
+//Problem 1
+/*
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node *next;
+} Node_t;
+
+Node_t *createNode(int value) {
+    Node_t *n = (Node_t *)malloc(sizeof(Node_t));
+    n->data = value;
+    n->next = NULL;
+    return n;
+}
+
+int findMiddle(Node_t *head) {
+    if (head == NULL) return -1;
+    Node_t *slow = head;
+    Node_t *fast = head;
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow->data;
+}
+
+void freeList(Node_t *head) {
+    while (head != NULL) {
+        Node_t *temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+int main(void) {
+
+    Node_t *head = createNode(10);
+    head->next = createNode(20);
+    head->next->next = createNode(30);
+    head->next->next->next = createNode(40);
+    head->next->next->next->next = createNode(50);
+
+    printf("Middle node value: %d\n", findMiddle(head));
+
+    freeList(head);
+    return 0;
+}
+*/
+
+//Problem 2
+/*
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node *next;
+} Node_t;
+
+Node_t *createNode(int value) {
+    Node_t *n = (Node_t *)malloc(sizeof(Node_t));
+    n->data = value;
+    n->next = NULL;
+    return n;
+}
+
+int findNthFromEnd(Node_t *head, int n) {
+    Node_t *lead = head;
+    Node_t *follow = head;
+    for (int i = 0; i < n; i++) {
+        if (lead == NULL) return -1;
+        lead = lead->next;
+    }
+    while (lead != NULL) {
+        lead = lead->next;
+        follow = follow->next;
+    }
+    return (follow != NULL) ? follow->data : -1;
+}
+
+void freeList(Node_t *head) {
+    while (head != NULL) {
+        Node_t *temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+int main(void) {
+
+    Node_t *head = createNode(10);
+    head->next = createNode(20);
+    head->next->next = createNode(30);
+    head->next->next->next = createNode(40);
+    head->next->next->next->next = createNode(50);
+
+    printf("2nd from end: %d\n", findNthFromEnd(head, 2));
+
+    freeList(head);
+    return 0;
+}
+*/
+
+//Problem 3
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node *next;
+} Node_t;
+
+Node_t *createNode(int value) {
+    Node_t *n = (Node_t *)malloc(sizeof(Node_t));
+    n->data = value;
+    n->next = NULL;
+    return n;
+}
+
+void removeDuplicates(Node_t *head) {
+    Node_t *cur = head;
+    while (cur != NULL) {
+        Node_t *runner = cur;
+        while (runner->next != NULL) {
+            if (runner->next->data == cur->data) {
+                Node_t *dup = runner->next;
+                runner->next = dup->next;
+                free(dup);
+            } else {
+                runner = runner->next;
+            }
+        }
+        cur = cur->next;
+    }
+}
+
+void printList(Node_t *head) {
+    while (head != NULL) {
+        printf("%d -> ", head->data);
+        head = head->next;
+    }
+    printf("NULL\n");
+}
+
+void freeList(Node_t *head) {
+    while (head != NULL) {
+        Node_t *temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+int main(void) {
+    /* Build list: 5 -> 3 -> 5 -> 8 -> 3 -> 9 -> NULL */
+    Node_t *head = createNode(5);
+    head->next = createNode(3);
+    head->next->next = createNode(5);
+    head->next->next->next = createNode(8);
+    head->next->next->next->next = createNode(3);
+    head->next->next->next->next->next = createNode(9);
+
+    printf("Before: ");
+    printList(head);
+
+    removeDuplicates(head);
+
+    printf("After:  ");
+    printList(head);
+
+    freeList(head);
+    return 0;
+}

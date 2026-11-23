@@ -1,0 +1,11 @@
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
+configDescList=org.eclipse.launchbar.core.descriptorType.default\:InterviewGuide1.exe,org.eclipse.launchbar.core.descriptorType.default\:InterviewGuide2.exe,org.eclipse.launchbar.core.descriptorType.default\:InterviewGuide3.exe,org.eclipse.launchbar.core.descriptorType.default\:InterviewGuide4.exe,org.eclipse.launchbar.core.descriptorType.default\:InterviewGuide5.exe,org.eclipse.launchbar.core.descriptorType.default\:InterviewGuide6.exe,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:InterviewGuide7 Debug,org.eclipse.launchbar.core.descriptorType.default\:InterviewGuide7.exe
+eclipse.preferences.version=1
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:InterviewGuide7\ Debug/activeLaunchTarget=null\:---
+org.eclipse.launchbar.core.descriptorType.default\:InterviewGuide1.exe/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:InterviewGuide1.exe/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
+org.eclipse.launchbar.core.descriptorType.default\:InterviewGuide2.exe/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:InterviewGuide3.exe/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:InterviewGuide7.exe/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local

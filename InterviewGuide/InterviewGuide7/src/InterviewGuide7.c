@@ -1,0 +1,370 @@
+//Problem 1
+/*
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node *next;
+} Node_t;
+
+Node_t *createNode(int value) {
+    Node_t *n = (Node_t *)malloc(sizeof(Node_t));
+    n->data = value;
+    n->next = NULL;
+    return n;
+}
+
+int findMiddle(Node_t *head) {
+    if (head == NULL) return -1;
+    Node_t *slow = head;
+    Node_t *fast = head;
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow->data;
+}
+
+void freeList(Node_t *head) {
+    while (head != NULL) {
+        Node_t *temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+int main(void) {
+
+    Node_t *head = createNode(10);
+    head->next = createNode(20);
+    head->next->next = createNode(30);
+    head->next->next->next = createNode(40);
+    head->next->next->next->next = createNode(50);
+
+    printf("Middle node value: %d\n", findMiddle(head));
+
+    freeList(head);
+    return 0;
+}
+*/
+
+//Problem 2
+/*
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node *next;
+} Node_t;
+
+Node_t *createNode(int value) {
+    Node_t *n = (Node_t *)malloc(sizeof(Node_t));
+    n->data = value;
+    n->next = NULL;
+    return n;
+}
+
+int findNthFromEnd(Node_t *head, int n) {
+    Node_t *lead = head;
+    Node_t *follow = head;
+    for (int i = 0; i < n; i++) {
+        if (lead == NULL) return -1;
+        lead = lead->next;
+    }
+    while (lead != NULL) {
+        lead = lead->next;
+        follow = follow->next;
+    }
+    return (follow != NULL) ? follow->data : -1;
+}
+
+void freeList(Node_t *head) {
+    while (head != NULL) {
+        Node_t *temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+int main(void) {
+
+    Node_t *head = createNode(10);
+    head->next = createNode(20);
+    head->next->next = createNode(30);
+    head->next->next->next = createNode(40);
+    head->next->next->next->next = createNode(50);
+
+    printf("2nd from end: %d\n", findNthFromEnd(head, 2));
+
+    freeList(head);
+    return 0;
+}
+*/
+
+//Problem 3
+/*
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node *next;
+} Node_t;
+
+Node_t *createNode(int value) {
+    Node_t *n = (Node_t *)malloc(sizeof(Node_t));
+    n->data = value;
+    n->next = NULL;
+    return n;
+}
+
+void removeDuplicates(Node_t *head) {
+    Node_t *cur = head;
+    while (cur != NULL) {
+        Node_t *runner = cur;
+        while (runner->next != NULL) {
+            if (runner->next->data == cur->data) {
+                Node_t *dup = runner->next;
+                runner->next = dup->next;
+                free(dup);
+            } else {
+                runner = runner->next;
+            }
+        }
+        cur = cur->next;
+    }
+}
+
+void printList(Node_t *head) {
+    while (head != NULL) {
+        printf("%d -> ", head->data);
+        head = head->next;
+    }
+    printf("NULL\n");
+}
+
+void freeList(Node_t *head) {
+    while (head != NULL) {
+        Node_t *temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+int main(void) {
+
+    Node_t *head = createNode(5);
+    head->next = createNode(3);
+    head->next->next = createNode(5);
+    head->next->next->next = createNode(8);
+    head->next->next->next->next = createNode(3);
+    head->next->next->next->next->next = createNode(9);
+
+    printf("Before: ");
+    printList(head);
+
+    removeDuplicates(head);
+
+    printf("After:  ");
+    printList(head);
+
+    freeList(head);
+    return 0;
+}
+*/
+
+//Problem 4
+/*
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node *next;
+} Node_t;
+
+Node_t *createNode(int value) {
+    Node_t *n = (Node_t *)malloc(sizeof(Node_t));
+    n->data = value;
+    n->next = NULL;
+    return n;
+}
+
+Node_t *reverseList(Node_t *head) {
+    Node_t *prev = NULL;
+    Node_t *cur = head;
+    while (cur != NULL) {
+        Node_t *next = cur->next;
+        cur->next = prev;
+        prev = cur;
+        cur = next;
+    }
+    return prev;
+}
+
+int isPalindrome(Node_t *head) {
+    if (head == NULL || head->next == NULL) return 1;
+
+    Node_t *slow = head;
+    Node_t *fast = head;
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    Node_t *secondHalf = reverseList(slow->next);
+    Node_t *p1 = head;
+    Node_t *p2 = secondHalf;
+    int result = 1;
+
+    while (p2 != NULL) {
+        if (p1->data != p2->data) {
+            result = 0;
+            break;
+        }
+        p1 = p1->next;
+        p2 = p2->next;
+    }
+
+    slow->next = reverseList(secondHalf);
+    return result;
+}
+
+void freeList(Node_t *head) {
+    while (head != NULL) {
+        Node_t *temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+int main(void) {
+
+    Node_t *list1 = createNode(1);
+    list1->next = createNode(2);
+    list1->next->next = createNode(3);
+    list1->next->next->next = createNode(2);
+    list1->next->next->next->next = createNode(1);
+
+
+    Node_t *list2 = createNode(1);
+    list2->next = createNode(2);
+    list2->next->next = createNode(3);
+
+    printf("1,2,3,2,1 is palindrome: %s\n", isPalindrome(list1) ? "yes" : "no");
+    printf("1,2,3 is palindrome: %s\n", isPalindrome(list2) ? "yes" : "no");
+
+    freeList(list1);
+    freeList(list2);
+    return 0;
+}
+*/
+
+//Problem 5
+/*
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node *next;
+} Node_t;
+
+Node_t *createNode(int value) {
+    Node_t *n = (Node_t *)malloc(sizeof(Node_t));
+    n->data = value;
+    n->next = NULL;
+    return n;
+}
+
+void deleteGivenNode(Node_t *node) {
+    if (node == NULL || node->next == NULL) return;
+    Node_t *temp = node->next;
+    node->data = temp->data;
+    node->next = temp->next;
+    free(temp);
+}
+
+void printList(Node_t *head) {
+    while (head != NULL) {
+        printf("%d -> ", head->data);
+        head = head->next;
+    }
+    printf("NULL\n");
+}
+
+void freeList(Node_t *head) {
+    while (head != NULL) {
+        Node_t *temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+int main(void) {
+
+    Node_t *head = createNode(10);
+    Node_t *node20 = createNode(20);
+    head->next = node20;
+    node20->next = createNode(30);
+    node20->next->next = createNode(40);
+
+    printf("Before: ");
+    printList(head);
+
+
+    deleteGivenNode(node20);
+
+    printf("After:  ");
+    printList(head);
+
+    freeList(head);
+    return 0;
+}
+*/
+
+//Problem 6
+/*
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node *next;
+} Node_t;
+
+Node_t *createNode(int value) {
+    Node_t *n = (Node_t *)malloc(sizeof(Node_t));
+    n->data = value;
+    n->next = NULL;
+    return n;
+}
+
+int countNodesRecursive(Node_t *head) {
+    if (head == NULL) return 0;
+    return 1 + countNodesRecursive(head->next);
+}
+
+void freeList(Node_t *head) {
+    while (head != NULL) {
+        Node_t *temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+int main(void) {
+
+    Node_t *head = createNode(10);
+    head->next = createNode(20);
+    head->next->next = createNode(30);
+    head->next->next->next = createNode(40);
+
+    printf("Node count: %d\n", countNodesRecursive(head));
+
+    freeList(head);
+    return 0;
+}
+*/

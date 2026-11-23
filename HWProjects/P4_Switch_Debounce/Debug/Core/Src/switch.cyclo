@@ -1,0 +1,2 @@
+../Core/Src/switch.c:12:6:HAL_TIM_PeriodElapsedCallback	5
+../Core/Src/switch.c:36:6:checkAndUpdateOuput	2
